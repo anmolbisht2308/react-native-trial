@@ -14,5 +14,11 @@
     ]
   ],
   "name": "evoliq-application",
-  "slug": "evoliq-application"
+  "slug": "evoliq-application",
+  "android": {
+    "package": "com.jigodji.evoliqapplication"
+  },
+  "ios": {
+    "bundleIdentifier": "com.jigodji.evoliqapplication"
+  }
 }
