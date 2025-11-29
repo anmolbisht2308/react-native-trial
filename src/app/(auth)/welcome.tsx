@@ -12,6 +12,12 @@ import Animated, {
 } from "react-native-reanimated";
 import { StatusBar } from "expo-status-bar";
 
+import Avatar1 from "../../assets/avatar1.svg";
+import Avatar2 from "../../assets/avatar2.svg";
+import Avatar3 from "../../assets/avatar3.svg";
+import Avatar4 from "../../assets/avatar4.svg";
+import Avatar5 from "../../assets/avatar5.svg";
+
 const { width } = Dimensions.get("window");
 
 export default function WelcomeScreen() {
@@ -47,15 +53,43 @@ export default function WelcomeScreen() {
 
             {/* Background Circles */}
             <View className="absolute top-0 left-0 right-0 bottom-0 items-center justify-center">
+                {/* Outer Ring (Ring 3) */}
                 <Animated.View
                     style={[circle3Style, { width: width * 1.8, height: width * 1.8, borderRadius: width * 0.9, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", position: "absolute" }]}
-                />
+                >
+                    {/* Avatar 5: Top Center */}
+                    <View style={{ position: "absolute", top: -20, left: "50%", marginLeft: -20 }}>
+                        <Avatar5 width={40} height={40} />
+                    </View>
+                </Animated.View>
+
+                {/* Middle Ring (Ring 2) */}
                 <Animated.View
                     style={[circle2Style, { width: width * 1.4, height: width * 1.4, borderRadius: width * 0.7, borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", position: "absolute" }]}
-                />
+                >
+                    {/* Avatar 3: Top Left */}
+                    <View style={{ position: "absolute", top: "15%", left: "15%" }}>
+                        <Avatar3 width={45} height={45} />
+                    </View>
+                    {/* Avatar 4: Bottom Right */}
+                    <View style={{ position: "absolute", bottom: "15%", right: "15%" }}>
+                        <Avatar4 width={45} height={45} />
+                    </View>
+                </Animated.View>
+
+                {/* Inner Ring (Ring 1) */}
                 <Animated.View
                     style={[circle1Style, { width: width, height: width, borderRadius: width * 0.5, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", position: "absolute" }]}
-                />
+                >
+                    {/* Avatar 1: Top Right */}
+                    <View style={{ position: "absolute", top: "10%", right: "10%" }}>
+                        <Avatar1 width={50} height={50} />
+                    </View>
+                    {/* Avatar 2: Bottom Left */}
+                    <View style={{ position: "absolute", bottom: "10%", left: "10%" }}>
+                        <Avatar2 width={50} height={50} />
+                    </View>
+                </Animated.View>
             </View>
 
             {/* Header Content */}
