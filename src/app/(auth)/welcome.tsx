@@ -1,0 +1,111 @@
+import { useRouter } from "expo-router";
+import React, { useEffect } from "react";
+import { View, Text, Pressable, Image, Dimensions } from "react-native";
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withDelay,
+    FadeInDown,
+    FadeIn
+} from "react-native-reanimated";
+import { StatusBar } from "expo-status-bar";
+
+const { width } = Dimensions.get("window");
+
+export default function WelcomeScreen() {
+    const router = useRouter();
+
+    // Animation values
+    const logoScale = useSharedValue(0);
+    const circleScale1 = useSharedValue(0);
+    const circleScale2 = useSharedValue(0);
+    const circleScale3 = useSharedValue(0);
+
+    useEffect(() => {
+        // Staggered animation for circles
+        circleScale1.value = withDelay(0, withSpring(1, { damping: 12 }));
+        circleScale2.value = withDelay(200, withSpring(1, { damping: 12 }));
+        circleScale3.value = withDelay(400, withSpring(1, { damping: 12 }));
+
+        // Logo animation
+        logoScale.value = withDelay(600, withSpring(1, { damping: 10 }));
+    }, []);
+
+    const logoStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: logoScale.value }]
+    }));
+
+    const circle1Style = useAnimatedStyle(() => ({ transform: [{ scale: circleScale1.value }] }));
+    const circle2Style = useAnimatedStyle(() => ({ transform: [{ scale: circleScale2.value }] }));
+    const circle3Style = useAnimatedStyle(() => ({ transform: [{ scale: circleScale3.value }] }));
+
+    return (
+        <View className="flex-1 bg-[#052e16] items-center justify-between py-12 relative overflow-hidden">
+            <StatusBar style="light" />
+
+            {/* Background Circles */}
+            <View className="absolute top-0 left-0 right-0 bottom-0 items-center justify-center">
+                <Animated.View
+                    style={[circle3Style, { width: width * 1.8, height: width * 1.8, borderRadius: width * 0.9, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", position: "absolute" }]}
+                />
+                <Animated.View
+                    style={[circle2Style, { width: width * 1.4, height: width * 1.4, borderRadius: width * 0.7, borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", position: "absolute" }]}
+                />
+                <Animated.View
+                    style={[circle1Style, { width: width, height: width, borderRadius: width * 0.5, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", position: "absolute" }]}
+                />
+            </View>
+
+            {/* Header Content */}
+            <Animated.View entering={FadeInDown.delay(800).springify()} className="items-center mt-10 z-10">
+                <View className="flex-row items-center gap-2 mb-2">
+                    <Text className="text-white/80 text-sm font-medium">Proudly built for Indian workers</Text>
+                    <Text className="text-sm">🇮🇳</Text>
+                </View>
+            </Animated.View>
+
+            {/* Center Logo/Branding */}
+            <View className="items-center z-10">
+                {/* Floating Avatars (Mock representation) */}
+                {/* In a real app, these would be positioned absolutely around the center */}
+
+                <Animated.View style={logoStyle} className="items-center">
+                    <View className="flex-row items-center gap-2 mb-4">
+                        {/* Logo Icon */}
+                        <View className="w-12 h-12 bg-[#ABD147] rounded-tl-2xl rounded-br-2xl items-center justify-center">
+                            <Text className="text-[#052e16] text-2xl font-bold">e</Text>
+                        </View>
+                        <Text className="text-5xl font-bold text-white tracking-tight">evoliq</Text>
+                    </View>
+                </Animated.View>
+
+                <Animated.View entering={FadeIn.delay(1000)} className="items-center mt-8 px-8">
+                    <Text className="text-[#ABD147] text-lg font-semibold text-center mb-2">
+                        India's Trusted Early Wage Platform
+                    </Text>
+                    <Text className="text-white/60 text-center leading-6">
+                        Instant cash, earned by you — for you.
+                    </Text>
+                </Animated.View>
+            </View>
+
+            {/* Bottom Actions */}
+            <Animated.View entering={FadeInDown.delay(1200).springify()} className="w-full px-6 gap-4 z-10">
+                <Pressable
+                    onPress={() => router.push("/(auth)/login")}
+                    className="w-full bg-[#E8F5D6] py-4 rounded-xl items-center active:opacity-90"
+                >
+                    <Text className="text-[#052e16] font-bold text-lg">Get Started</Text>
+                </Pressable>
+
+                <Pressable
+                    onPress={() => router.push("/(auth)/login")}
+                    className="w-full border border-white/20 py-4 rounded-xl items-center active:bg-white/5"
+                >
+                    <Text className="text-white font-medium text-lg">I have an account</Text>
+                </Pressable>
+            </Animated.View>
+        </View>
+    );
+}

@@ -1,6 +1,8 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Pressable, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserHeader from "../../components/home/UserHeader";
 import BalanceCard from "../../components/home/BalanceCard";
 import FinancialOverview from "../../components/home/FinancialOverview";
@@ -11,11 +13,25 @@ import { Colors } from "../../constants/colors";
 
 export default function HomePage() {
     const { top } = useSafeAreaInsets();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        await AsyncStorage.removeItem("isLoggedIn");
+        router.replace("/(auth)/welcome");
+    };
 
     return (
         <View className="flex-1" style={{ backgroundColor: Colors.background, paddingTop: top }}>
-            {/* User Header */}
-            <UserHeader userName="Pankaj Saini" greeting="Good Morning!" />
+            {/* User Header with Logout */}
+            <View className="relative">
+                <UserHeader userName="Pankaj Saini" greeting="Good Morning!" />
+                <Pressable
+                    onPress={handleLogout}
+                    className="absolute right-4 top-4 bg-red-100 px-3 py-1 rounded-full"
+                >
+                    <Text className="text-red-600 text-xs font-bold">Logout</Text>
+                </Pressable>
+            </View>
 
             <ScrollView
                 className="flex-1"
