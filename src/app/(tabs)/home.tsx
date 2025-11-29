@@ -11,6 +11,8 @@ import EarningProcess from "../../components/home/EarningProcess";
 import RecentActivity from "../../components/home/RecentActivity";
 import { Colors } from "../../constants/colors";
 
+import TopBlur from "../../components/ui/TopBlur";
+
 export default function HomePage() {
     const { top } = useSafeAreaInsets();
     const router = useRouter();
@@ -21,7 +23,8 @@ export default function HomePage() {
     };
 
     return (
-        <View className="flex-1" style={{ backgroundColor: Colors.background, paddingTop: top }}>
+        <View className="flex-1 relative" style={{ backgroundColor: Colors.background, paddingTop: top }}>
+            <TopBlur />
             {/* User Header with Logout */}
             <View className="relative">
                 <UserHeader userName="Pankaj Saini" greeting="Good Morning!" />

@@ -22,6 +22,8 @@ function LogoIcon() {
     );
 }
 
+import TopBlur from "../../components/ui/TopBlur";
+
 export default function OTPScreen() {
     const router = useRouter();
     const { method, value } = useLocalSearchParams();
@@ -79,8 +81,9 @@ export default function OTPScreen() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                className="flex-1 bg-white"
+                className="flex-1 bg-white relative"
             >
+                <TopBlur />
                 <StatusBar style="dark" />
 
                 {/* Header */}

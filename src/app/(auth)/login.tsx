@@ -21,6 +21,8 @@ function LogoIcon() {
     );
 }
 
+import TopBlur from "../../components/ui/TopBlur";
+
 export default function LoginScreen() {
     const router = useRouter();
     const [method, setMethod] = useState<"mobile" | "email">("mobile");
@@ -36,8 +38,9 @@ export default function LoginScreen() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                className="flex-1 bg-white"
+                className="flex-1 bg-white relative"
             >
+                <TopBlur />
                 <StatusBar style="dark" />
 
                 {/* Header */}

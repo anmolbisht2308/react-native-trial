@@ -16,6 +16,8 @@ function CheckIcon() {
     );
 }
 
+import TopBlur from "../../components/ui/TopBlur";
+
 export default function ConsentScreen() {
     const router = useRouter();
 
@@ -25,7 +27,8 @@ export default function ConsentScreen() {
     };
 
     return (
-        <View className="flex-1 bg-black/50 justify-end">
+        <View className="flex-1 bg-black/50 justify-end relative">
+            <TopBlur />
             <StatusBar style="light" />
 
             {/* Modal Content */}
