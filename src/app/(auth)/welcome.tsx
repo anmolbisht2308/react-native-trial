@@ -6,6 +6,7 @@ import Animated, {
     useAnimatedStyle,
     withSpring,
     withDelay,
+    withTiming,
     FadeInDown,
     FadeIn
 } from "react-native-reanimated";
@@ -23,13 +24,13 @@ export default function WelcomeScreen() {
     const circleScale3 = useSharedValue(0);
 
     useEffect(() => {
-        // Staggered animation for circles
-        circleScale1.value = withDelay(0, withSpring(1, { damping: 12 }));
-        circleScale2.value = withDelay(200, withSpring(1, { damping: 12 }));
-        circleScale3.value = withDelay(400, withSpring(1, { damping: 12 }));
+        // Staggered animation for circles - smoother timing
+        circleScale1.value = withDelay(0, withTiming(1, { duration: 1000 }));
+        circleScale2.value = withDelay(200, withTiming(1, { duration: 1000 }));
+        circleScale3.value = withDelay(400, withTiming(1, { duration: 1000 }));
 
-        // Logo animation
-        logoScale.value = withDelay(600, withSpring(1, { damping: 10 }));
+        // Logo animation - smooth scale
+        logoScale.value = withDelay(600, withTiming(1, { duration: 800 }));
     }, []);
 
     const logoStyle = useAnimatedStyle(() => ({
@@ -58,7 +59,7 @@ export default function WelcomeScreen() {
             </View>
 
             {/* Header Content */}
-            <Animated.View entering={FadeInDown.delay(800).springify()} className="items-center mt-10 z-10">
+            <Animated.View entering={FadeInDown.delay(800).duration(800)} className="items-center mt-10 z-10">
                 <View className="flex-row items-center gap-2 mb-2">
                     <Text className="text-white/80 text-sm font-medium">Proudly built for Indian workers</Text>
                     <Text className="text-sm">🇮🇳</Text>
@@ -91,7 +92,7 @@ export default function WelcomeScreen() {
             </View>
 
             {/* Bottom Actions */}
-            <Animated.View entering={FadeInDown.delay(1200).springify()} className="w-full px-6 gap-4 z-10">
+            <Animated.View entering={FadeInDown.delay(1200).duration(800)} className="w-full px-6 gap-4 z-10">
                 <Pressable
                     onPress={() => router.push("/(auth)/login")}
                     className="w-full bg-[#E8F5D6] py-4 rounded-xl items-center active:opacity-90"

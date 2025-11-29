@@ -30,7 +30,7 @@ export default function ConsentScreen() {
 
             {/* Modal Content */}
             <Animated.View
-                entering={FadeInDown.springify().damping(15)}
+                entering={FadeInDown.duration(600)}
                 className="bg-white rounded-t-3xl p-8 items-center"
                 style={{ minHeight: 400 }}
             >

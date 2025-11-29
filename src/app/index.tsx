@@ -5,6 +5,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
+  withTiming,
   withDelay,
   FadeInDown
 } from "react-native-reanimated";
@@ -18,9 +19,9 @@ export default function SplashScreen() {
   const opacity = useSharedValue(0);
 
   useEffect(() => {
-    // Start animations
-    scale.value = withSpring(1, { damping: 10 });
-    opacity.value = withDelay(500, withSpring(1));
+    // Start animations - smoother timing
+    scale.value = withTiming(1, { duration: 800 });
+    opacity.value = withDelay(500, withTiming(1, { duration: 800 }));
 
     const checkLogin = async () => {
       try {
@@ -52,7 +53,7 @@ export default function SplashScreen() {
   const textStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
-      transform: [{ translateY: withSpring(opacity.value * 0, { damping: 12 }) }] // Slide up effect handled by layout
+      transform: [{ translateY: withTiming(opacity.value * 0, { duration: 800 }) }]
     };
   });
 
@@ -74,13 +75,13 @@ export default function SplashScreen() {
         </Animated.Text>
 
         <View className="items-center gap-3">
-          <Animated.View entering={FadeInDown.delay(1000).springify()}>
+          <Animated.View entering={FadeInDown.delay(1000).duration(800)}>
             <Text className="text-xl font-bold text-center" style={{ color: '#ABD147' }}>
               India's Trusted Early Wage Platform
             </Text>
           </Animated.View>
 
-          <Animated.View entering={FadeInDown.delay(1200).springify()}>
+          <Animated.View entering={FadeInDown.delay(1200).duration(800)}>
             <Text className="text-base font-medium text-gray-500 text-center leading-6">
               Instant cash, earned by you — for you.
             </Text>
