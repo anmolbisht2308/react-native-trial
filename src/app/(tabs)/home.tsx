@@ -20,7 +20,7 @@ export default function HomePage() {
             <ScrollView
                 className="flex-1"
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ paddingBottom: 20 }}
+                contentContainerStyle={{ paddingBottom: 120 }}
             >
                 {/* Balance Card */}
                 <View className="mb-5">

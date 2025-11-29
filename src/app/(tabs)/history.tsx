@@ -11,7 +11,7 @@ export default function HistoryPage() {
                 <Text className="text-2xl font-bold text-gray-800">History</Text>
             </View>
 
-            <ScrollView className="flex-1 px-6 py-6">
+            <ScrollView className="flex-1 px-6 py-6" contentContainerStyle={{ paddingBottom: 120 }}>
                 <View className="gap-4">
                     <Text className="text-lg text-gray-600">
                         Transaction History
