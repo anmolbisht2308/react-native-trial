@@ -22,7 +22,7 @@ export default function BottomBlur() {
             }}
             pointerEvents="none"
         >
-            <Svg
+            {/* <Svg
                 width={svgWidth}
                 height={svgHeight}
                 viewBox="0 0 1058 845"
@@ -92,7 +92,7 @@ export default function BottomBlur() {
                         <Stop offset="0.504878" stopColor="#E6F3EB" stopOpacity="0" />
                     </RadialGradient>
                 </Defs>
-            </Svg>
+            </Svg> */}
         </View>
     );
 }

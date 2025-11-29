@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Svg, { Path, Circle } from 'react-native-svg';
+import { useRouter } from 'expo-router';
 import { Colors } from '../../constants/colors';
 
 
@@ -40,6 +41,8 @@ function ArrowRightIcon() {
 
 
 export default function BalanceCard({ amount, nextPaydayDays }: BalanceCardProps) {
+    const router = useRouter();
+
     return (
         <View className="mx-6 rounded-3xl p-6 relative overflow-hidden" style={{ backgroundColor: Colors.secondaryGreen }}>
 
@@ -64,7 +67,10 @@ export default function BalanceCard({ amount, nextPaydayDays }: BalanceCardProps
                 <Text className="text-white text-sm opacity-90">
                     Next payday in {nextPaydayDays} days
                 </Text>
-                <Pressable className="flex-row items-center gap-2 bg-white/20 px-4 py-2 rounded-full">
+                <Pressable
+                    onPress={() => router.push("/withdraw/request")}
+                    className="flex-row items-center gap-2 bg-white/20 px-4 py-2 rounded-full active:bg-white/30"
+                >
                     <Text className="text-white font-semibold">Withdraw</Text>
                     <ArrowRightIcon />
                 </Pressable>

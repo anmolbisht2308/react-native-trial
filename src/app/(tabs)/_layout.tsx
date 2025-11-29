@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Tabs } from "expo-router";
 import { View, Text, Pressable, Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path, Circle } from "react-native-svg";
+import BottomBlur from "../../components/ui/BottomBlur";
 
 const { width } = Dimensions.get("window");
 
@@ -133,7 +134,7 @@ function CenterActionIcon() {
 
 // --- Tab button ---
 
-function TabButton({
+const TabButton = React.memo(function TabButton({
     isFocused,
     onPress,
     options,
@@ -162,7 +163,7 @@ function TabButton({
             </Text>
         </Pressable>
     );
-}
+});
 
 // --- Tabs layout wrapper ---
 
@@ -170,51 +171,54 @@ export default function TabsLayout() {
     const { bottom } = useSafeAreaInsets();
 
     return (
-        <Tabs
-            screenOptions={{
-                headerShown: false,
-                tabBarStyle: {
-                    height: TAB_BAR_HEIGHT + bottom,
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    backgroundColor: "transparent",
-                    elevation: 0,
-                    borderTopWidth: 0,
-                },
-            }}
-            tabBar={(props) => <CustomTabBar {...props} />}
-        >
-            <Tabs.Screen
-                name="home"
-                options={{
-                    title: "Home",
-                    tabBarIcon: ({ focused }) => <HomeIcon focused={focused} />,
+        <View style={{ flex: 1 }}>
+            <Tabs
+                screenOptions={{
+                    headerShown: false,
+                    tabBarStyle: {
+                        height: TAB_BAR_HEIGHT + bottom,
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        backgroundColor: "transparent",
+                        elevation: 0,
+                        borderTopWidth: 0,
+                    },
                 }}
-            />
-            <Tabs.Screen
-                name="history"
-                options={{
-                    title: "History",
-                    tabBarIcon: ({ focused }) => <HistoryIcon focused={focused} />,
-                }}
-            />
-            <Tabs.Screen
-                name="help"
-                options={{
-                    title: "Help",
-                    tabBarIcon: ({ focused }) => <HelpIcon focused={focused} />,
-                }}
-            />
-            <Tabs.Screen
-                name="profile"
-                options={{
-                    title: "Profile",
-                    tabBarIcon: ({ focused }) => <ProfileIcon focused={focused} />,
-                }}
-            />
-        </Tabs>
+                tabBar={(props) => <CustomTabBar {...props} />}
+            >
+                <Tabs.Screen
+                    name="home"
+                    options={{
+                        title: "Home",
+                        tabBarIcon: ({ focused }) => <HomeIcon focused={focused} />,
+                    }}
+                />
+                <Tabs.Screen
+                    name="history"
+                    options={{
+                        title: "History",
+                        tabBarIcon: ({ focused }) => <HistoryIcon focused={focused} />,
+                    }}
+                />
+                <Tabs.Screen
+                    name="help"
+                    options={{
+                        title: "Help",
+                        tabBarIcon: ({ focused }) => <HelpIcon focused={focused} />,
+                    }}
+                />
+                <Tabs.Screen
+                    name="profile"
+                    options={{
+                        title: "Profile",
+                        tabBarIcon: ({ focused }) => <ProfileIcon focused={focused} />,
+                    }}
+                />
+            </Tabs>
+            <BottomBlur />
+        </View>
     );
 }
 
@@ -232,7 +236,7 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
     const rightEdgeY = bumpHeight;
     const centerY = 0;
 
-    const path = [
+    const path = useMemo(() => [
         `M 0 ${leftEdgeY}`,
         `L ${centerX - bumpWidth / 2} ${leftEdgeY}`,
         `C ${centerX - bumpWidth / 4} ${leftEdgeY} ${centerX - bumpWidth / 4} ${centerY} ${centerX} ${centerY}`,
@@ -241,7 +245,7 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
         `L ${width} ${height}`,
         `L 0 ${height}`,
         "Z",
-    ].join(" ");
+    ].join(" "), [centerX, leftEdgeY, rightEdgeY, height, width, centerY]);
 
     const tabOrder = ["home", "history", "help", "profile"];
 
