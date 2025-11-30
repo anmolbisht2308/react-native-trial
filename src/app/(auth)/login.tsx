@@ -4,6 +4,7 @@ import { View, Text, TextInput, Pressable, KeyboardAvoidingView, Platform, Touch
 import { StatusBar } from "expo-status-bar";
 import Svg, { Path } from "react-native-svg";
 import Animated, { FadeInDown, FadeIn } from "react-native-reanimated";
+import Logo from "../../assets/logo.svg";
 
 function BackIcon() {
     return (
@@ -13,13 +14,7 @@ function BackIcon() {
     );
 }
 
-function LogoIcon() {
-    return (
-        <View className="w-16 h-16 bg-[#052e16] rounded-tl-2xl rounded-br-2xl items-center justify-center mb-6">
-            <Text className="text-[#ABD147] text-3xl font-bold">e</Text>
-        </View>
-    );
-}
+
 
 import TopBlur from "../../components/ui/TopBlur";
 
@@ -56,7 +51,9 @@ export default function LoginScreen() {
                 <View className="flex-1 px-8 pt-4">
                     {/* Logo & Title */}
                     <Animated.View entering={FadeInDown.duration(600)} className="items-center">
-                        <LogoIcon />
+                        <View className="mb-6">
+                            <Logo width={64} height={64} />
+                        </View>
                         <Text className="text-2xl font-bold text-[#052e16] mb-2">Sign in to your account</Text>
                         <Text className="text-gray-500 text-center mb-10">
                             Enter your {method === "mobile" ? "mobile no." : "email"} and password to log in

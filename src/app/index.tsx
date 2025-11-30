@@ -10,6 +10,7 @@ import Animated, {
   FadeInDown
 } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Logo from "../assets/logo.svg";
 
 export default function SplashScreen() {
   const router = useRouter();
@@ -62,9 +63,7 @@ export default function SplashScreen() {
       <View className="items-center gap-6">
         {/* Logo Placeholder */}
         <Animated.View style={[animatedStyle]} className="mb-4">
-          <View className="w-24 h-24 bg-[#ABD147] rounded-3xl items-center justify-center shadow-lg shadow-green-200">
-            <Text className="text-white text-6xl font-bold">e</Text>
-          </View>
+          <Logo width={100} height={100} />
         </Animated.View>
 
         <Animated.Text

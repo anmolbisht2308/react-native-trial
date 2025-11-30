@@ -17,6 +17,7 @@ import Avatar2 from "../../assets/avatar2.svg";
 import Avatar3 from "../../assets/avatar3.svg";
 import Avatar4 from "../../assets/avatar4.svg";
 import Avatar5 from "../../assets/avatar5.svg";
+import LogoFinal from "../../assets/logo_final.svg";
 
 const { width } = Dimensions.get("window");
 
@@ -106,12 +107,8 @@ export default function WelcomeScreen() {
                 {/* In a real app, these would be positioned absolutely around the center */}
 
                 <Animated.View style={logoStyle} className="items-center">
-                    <View className="flex-row items-center gap-2 mb-4">
-                        {/* Logo Icon */}
-                        <View className="w-12 h-12 bg-[#ABD147] rounded-tl-2xl rounded-br-2xl items-center justify-center">
-                            <Text className="text-[#052e16] text-2xl font-bold">e</Text>
-                        </View>
-                        <Text className="text-5xl font-bold text-white tracking-tight">evoliq</Text>
+                    <View className="mb-4">
+                        <LogoFinal width={200} height={60} />
                     </View>
                 </Animated.View>
 

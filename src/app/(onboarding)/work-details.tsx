@@ -9,10 +9,11 @@ import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { RadioGroup } from "../../components/ui/RadioGroup";
 
-// Mock Logo (Replace with actual SVG if available or keep as placeholder)
-const Logo = () => (
-    <View className="w-16 h-16 bg-[#052e16] rounded-tl-3xl rounded-br-3xl items-center justify-center mb-6">
-        <View className="w-8 h-8 bg-[#ABD147] rounded-tl-xl rounded-br-xl" />
+import Logo from "../../assets/logo.svg";
+
+const LogoContainer = () => (
+    <View className="mb-6">
+        <Logo width={64} height={64} />
     </View>
 );
 
@@ -67,7 +68,7 @@ export default function WorkDetailsScreen() {
 
             <ScrollView className="flex-1 px-6" showsVerticalScrollIndicator={false}>
                 <View className="items-center mt-4">
-                    <Logo />
+                    <LogoContainer />
                     <Text className="text-2xl font-bold text-[#052e16] mb-2">Work Details</Text>
                     <Text className="text-gray-500 text-center mb-8">Tell us about your workplace</Text>
                 </View>
