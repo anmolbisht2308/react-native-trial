@@ -128,7 +128,7 @@ export default function WelcomeScreen() {
             {/* Bottom Actions */}
             <Animated.View entering={FadeInDown.delay(1200).duration(800)} className="w-full px-6 gap-4 z-10">
                 <Pressable
-                    onPress={() => router.push("/(auth)/login")}
+                    onPress={() => router.push("/(onboarding)/work-details")}
                     className="w-full bg-[#E8F5D6] py-4 rounded-xl items-center active:opacity-90"
                 >
                     <Text className="text-[#052e16] font-bold text-lg">Get Started</Text>
